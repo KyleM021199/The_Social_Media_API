@@ -1,4 +1,4 @@
-const {Schema, Types} = require('mongoose');
+const {Schema, model} = require('mongoose');
 //User Model
     //User Schema
 const userSchema = new Schema(
@@ -29,6 +29,12 @@ const userSchema = new Schema(
             ref:'User',
         },
       ],
+    },
+    {
+      toJSON: {
+        virtuals: true,
+      },
+      id: false,
     }
 );
 
