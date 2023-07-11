@@ -1,21 +1,18 @@
 const { ObjectId } = require('mongoose').Types;
 const {User, Thought} = require('../models');
 //friendCount instance method
-//to count the number of tied to the user
+//to count the number of tied to the user 
 const friendCount = async () => {
     const numberOfFriends = await User.aggregate().count('friendCount');
     return numberOfFriends;
 }
 module.exports ={
-
-
-
 //for /users route
 // Get all users
 async getUsers(req, res){
 try{
 const users = await User.find()
-.populate({path: 'friends', select: '-__v'},{path: 'thoughts', select: '-__v'});
+.populate({path: 'friends'},{path: 'thoughts'});
 
 const userObj = {
     users,
@@ -32,7 +29,7 @@ res.json(userObj);
 async getSingleUser(req, res){
     try{
     const user = await User.findOne({_id: req.params.userId})
-    .populate({path: 'friends', select: '-__v'},{path: 'thoughts', select: '-__v'});
+    .populate({path: 'friends'},{path: 'thoughts'});
         if (!user){
             return res.status(404).json({ message: 'No user with that ID'});
         }
@@ -46,7 +43,8 @@ async getSingleUser(req, res){
 //Post a new user
 async createUser(req, res) {
     try{
-
+        const user = await User.create(req.body);
+        res.json(user)
     }catch (err){
         console.log(err);
         return res.status(500).json(err);
@@ -56,7 +54,8 @@ async createUser(req, res) {
 // Update a user by _id
 async updateUser(req, res) {
     try{
-
+        const user = await User.findOneAndUpdate({_id: req.params.userId});
+        res.json(user);
     }catch (err){
         console.log(err);
         return res.status(500).json(err);
@@ -66,10 +65,22 @@ async updateUser(req, res) {
 //Delete a user by _id
 async deleteUser(req, res) {
     try{
-
+    const user = await User.findOneAndDelete({_id: req.params.userId});
+        
+        if(!user){
+            return res.status(404).json({message: 'No user with this ID' });
+        }
+        await Thought.deleteMany({_id: {$in: user.thoughts}});
+        res.json({message: 'User and thoughts deleted!'})
     }catch (err){
         console.log(err);
         return res.status(500).json(err);
     }
 },
+
+//Add a new friend to user
+
+
+
+//Delete a friend from user
 } 
