@@ -30,10 +30,6 @@ const {Schema, model} = require('mongoose');
         }
         
     );
-    // date format method
-    // thoughtSchema.get(function () {
-    
-    // });
     // Thought virtual property
 //reaction virtual property
 thoughtSchema.virtual('reactionCount').get(function () {
