@@ -25,8 +25,8 @@ const usernames = [
     'Abdulkarem',
     'Smith',
     'Jones',
-    'Coollastname',
-    'enter_name_here',
+    'Selore',
+    'Heart',
     'Ze',
     'Zechariah',
     'Zeek',
@@ -119,16 +119,14 @@ const usernames = [
   //getting random item in the array 
   const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-const getRandomUsername = () =>{
+const getRandomUsername = () =>
 `${getRandomArrItem(usernames)}`;
-};
 
-const getRandomEmail = () =>{
+
+const getRandomEmail = () =>
     `${getRandomArrItem(emails)}`;
-    };
 
-const getRandomThought = () =>{
+const getRandomThought = () =>
     `${getRandomArrItem(thoughts)}`;
-    };
 
 module.exports = { getRandomUsername, getRandomEmail, getRandomThought};
