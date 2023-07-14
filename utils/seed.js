@@ -32,7 +32,6 @@ connection.once('open', async () => {
 
     }
     // Add Users to the collection and await the results
-    console.log('here');
   await User.collection.insertMany(users);
 
     //   const thoughts = [];

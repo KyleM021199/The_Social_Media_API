@@ -1,4 +1,4 @@
-const {User, Thought} = require('../models');
+const {User,Thought} = require('../models');
 const reactionCount = async () => {
     const numberOfReactions = await Thought.aggregate().count('reactionCount');
     return numberOfReactions;
