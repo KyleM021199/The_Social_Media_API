@@ -23,7 +23,7 @@
   N/A
 
   ## Usage
-  Go to the heroku link:
+  Go to the heroku link: https://social-media-app-kyle-7de78d322969.herokuapp.com/
 
   ## Contributing
   N/A
