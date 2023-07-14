@@ -60,7 +60,7 @@ async updateUser(req, res) {
     try{
         const user = await User.findOneAndUpdate(
             {_id: req.params.userId},
-            {$addToSet: req.body},
+            {$set: req.body},
             {new: true}
             );
             if (!user){
