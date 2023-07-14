@@ -24,6 +24,7 @@
 
   ## Usage
   Go to the heroku link: https://social-media-app-kyle-7de78d322969.herokuapp.com/
+  After that, type in the right route ahead of the link
 
   ## Contributing
   N/A
