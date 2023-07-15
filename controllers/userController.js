@@ -6,6 +6,13 @@ const friendCount = async () => {
     const numberOfFriends = await User.aggregate().count('friendCount');
     return numberOfFriends;
 }
+// const addingFriend = async() => {
+//     const numberOfFriends = await User.aggregate({
+//         $match:{}
+//         $add: 1,
+//     })
+// } 
+
 module.exports ={
 //for /users route
 // Get all users
@@ -15,12 +22,7 @@ const users = await User.find()
 .select('-__v');
 
 
-
-const userObj = {
-    users,
-    friendCount: await friendCount(), 
-}
-res.json(userObj);
+res.json(users);
 }catch (err){
     console.log(err);
     return res.status(500).json(err);
@@ -34,6 +36,7 @@ async getSingleUser(req, res){
     .select('-__v')
     .populate('friends') 
     .populate('thoughts');
+
         if (!user){
             return res.status(404).json({ message: 'No user with that ID'});
         }
@@ -105,6 +108,8 @@ async addFriend(req, res){
     if (!friend){
         return res.status(404).json({ message: 'No user with that ID'});
     }
+
+    
     res.json(friend);
     }catch (err){
         console.log(err);
@@ -124,6 +129,7 @@ async removeFriend(req, res){
         if (!friend){
             return res.status(404).json({ message: 'No user with that ID'});
         }
+
         res.json(friend);
     }catch (err){
         console.log(err);
